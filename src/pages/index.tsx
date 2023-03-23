@@ -1,3 +1,4 @@
+import { useState } from "react"
 import type { NextPage }  from 'next'
 import Image from 'next/image'
 import { Fleur_De_Leah, Inter } from 'next/font/google'
@@ -11,6 +12,8 @@ interface SearchCatImage {
 }
 
 const Home: NextPage = () => {
+  const [catImageUrl, setCatImageUrl] = useState("")
+
   // APIをたたくときは非同期処理になるのでasync関数で書く
   const fetchCatImage = async (): Promise<SearchCatImage> => {
     const res = await fetch("https://api.thecatapi.com/v1/images/search")
@@ -21,7 +24,7 @@ const Home: NextPage = () => {
 
   const  handleClick = async () => {
     const catImage = await fetchCatImage()
-    console.log(catImage);
+    setCatImageUrl(catImage.url)
   }
  
   
@@ -36,7 +39,8 @@ const Home: NextPage = () => {
     }}> 
       <h1>猫画像アプリ</h1>
       <img 
-        src="https://cdn2.thecatapi.com/images/dc5.jpg" alt=""  
+        src={catImageUrl}
+        alt=""  
         width={500} 
         height="auto"
       />
