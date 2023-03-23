@@ -9,10 +9,13 @@ const Home: NextPage = () => {
     const res = await fetch("https://api.thecatapi.com/v1/images/search")
     const result = res.json();
     // console.log(result[0]);
-    return result[0];
+    return result;
   };
 
-  const handleClick = 
+  const  handleClick = async () => {
+    const catImage = await fetchCatImage()
+    console.log(catImage);
+  }
  
   
   return (
@@ -30,7 +33,7 @@ const Home: NextPage = () => {
         width={500} 
         height="auto"
       />
-      <button onClick={fetchCatImage}>
+      <button onClick={handleClick}>
         今日の猫さん
       </button>
     </div>
