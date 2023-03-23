@@ -3,9 +3,16 @@ import Image from 'next/image'
 import { Fleur_De_Leah, Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 
+interface SearchCatImage {
+  id: string;
+  url: string;
+  width: number;
+  height: number;
+}
+
 const Home: NextPage = () => {
   // APIをたたくときは非同期処理になるのでasync関数で書く
-  const fetchCatImage = async () => {
+  const fetchCatImage = async (): Promise<SearchCatImage> => {
     const res = await fetch("https://api.thecatapi.com/v1/images/search")
     const result = res.json();
     // console.log(result[0]);
